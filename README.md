@@ -1,5 +1,8 @@
 ## FiveM Vehicle Modkit Manager
 
+### Disclaimer
+- I know people have made this scripts in the past if not recently, however, me personally I (1) could never find them and (2) majority if not all the scripts I've found personally have only been made for vehicles they've released therefore not working for overall any vehicle with modkits. Soooooo I made this. 
+
 ### Description
 - This is a lightweight FiveM script that automatically applies and enforces specific vehicle modifications for server vehicles. It ensures that whenever a player enters a configured vehicle, any missing mods from a predefined list are instantly applied.
 
@@ -32,7 +35,9 @@
 
 2. Add the following line to your server.cfg file to start the resource:
 
-```ensure SimpleModkitManager```
+```
+ensure SimpleModkitManager
+```
 
 (Note: Replace SimpleModkitManager with the name of your resource folder if you changed it.)
 
@@ -43,25 +48,23 @@
 ### Configuration
 - Configuration is done entirely within the config.lua file.
 
-``Config_vehicleModConfig``: This is the main table where you define your settings.
+- ``Config_vehicleModConfig``: This is the main table where you define your settings.
 
-- To add a vehicle, you create a new entry where the key is the vehicle's spawn name (e.g., "chp15exped") and the value is a list of modType numbers you want to enable.
+- To add a vehicle, you create a new entry where the key is the vehicle's spawn name (e.g., "police3") and the value is a list of modType numbers you want to enable.
 
 ### Example:
 - Let's say you want to force-enable the first available Roof accessory (modType 10) and the first available Grille (modType 6) on a vehicle with the spawn name police3.
 ```
 Config_vehicleModConfig = {
     ["police3"] = {10, 6}, -- Enables the first Roof and Grille options for police3```
-    ["sentinel"] = {0, 4}, -- Enables the first Spoiler and Exhaust options for sentinel
+    ["police"] = {0, 4}, -- Enables the first Spoiler and Exhaust options for sentinel
 }
 ```
 A list of common modType numbers is provided at the top of the config.lua file for easy reference.
 
 ### Usage (Commands)
 - This script includes one essential command for finding the correct modType numbers for your vehicles.
-
-``/getmods``
-- This command is your most powerful tool for configuring this script. It inspects the vehicle you are currently in and prints a complete list of all its available mod slots to the F8 console.
+- ``/getmods`` - *This command is your most powerful tool for configuring this script. It inspects the vehicle you are currently in and prints a complete list of all its available mod slots to the F8 console.*
 
 ### How to Use:
 
