@@ -1,92 +1,107 @@
-## FiveM Vehicle Modkit Manager
+<div align="center">
 
-### Disclaimer
-- I know people have made this scripts in the past if not recently, however, me personally I (1) could never find them and (2) majority if not all the scripts I've found personally have only been made for vehicles they've released therefore not working for overall any vehicle with modkits. Soooooo I made this. 
+# 🔧 SimpleModkit Manager
 
-### Description
-- This is a lightweight FiveM script that automatically applies and enforces specific vehicle modifications for server vehicles. It ensures that whenever a player enters a configured vehicle, any missing mods from a predefined list are instantly applied.
+### A lightweight FiveM utility for automatically applying configured vehicle modkit options.
 
-- The script is designed to enable the first available non-stock part (modIndex = 0) for any mod slot you specify. It also includes a powerful diagnostic command, /getmods, to help server owners easily identify which mod slots are available on any vehicle.
+<p>
+  <a href="https://simpledevelopments.org/store"><img src="https://img.shields.io/badge/Explore_Our_Store-5865F2?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
+  <a href="https://discord.gg/RquDVTfDwu"><img src="https://img.shields.io/badge/Join_Our_Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" /></a>
+  <a href="https://github.com/Fadinlaws123/SimpleModkit_Manager"><img src="https://img.shields.io/badge/View_on_GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
+</p>
 
-### Features
-- Automatic Mod Enforcement: Constantly checks the player's vehicle and applies missing mods from your configuration.
+<p>
+  <img src="https://img.shields.io/badge/FiveM-Standalone-FF6B35?style=flat-square&logo=fivem&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vehicle-Modkit_Manager-238636?style=flat-square" />
+  <img src="https://img.shields.io/badge/Status-Release_Ready-238636?style=flat-square" />
+  <img src="https://img.shields.io/github/stars/Fadinlaws123/SimpleModkit_Manager?style=flat-square&logo=github&label=Stars" />
+</p>
 
-- Easy Configuration: A clean config.lua file to specify which mod types to enable for each vehicle model.
+</div>
 
-- Mod Discovery Command: Includes a /getmods command to list all available mod slots and their options for any vehicle you're in.
+---
 
-- Lightweight: The script runs on a simple loop with minimal performance impact.
+## 📖 About
 
-### How It Works
-- The script operates on a continuous loop that runs every half-second.
+**SimpleModkit Manager** automatically applies configured vehicle modifications when a player enters a supported vehicle as the driver.
 
-1. It checks if the player is in a vehicle and is the driver.
+The resource is useful for addon or emergency vehicles that rely on specific mod slots for equipment, partitions, grilles, roof accessories, or other vehicle components that should always be enabled.
 
-2. It gets the vehicle's model name (e.g., "police3").
+A built-in `/getmods` diagnostic command helps identify the available modification slots on any vehicle.
 
-3. It looks in config.lua to see if there's a configuration for that model.
+---
 
-4. If a configuration exists, it loops through the list of specified modType numbers (e.g., spoilers, roof, grille).
+## ✨ Features
 
-5. For each modType, it checks if a mod is currently installed (GetVehicleMod). If the mod is missing (returns -1), the script automatically applies the first available part (modIndex = 0).
+- Automatic vehicle mod enforcement
+- Per-vehicle configuration
+- Supports configurable mod type slots
+- Applies the first available non-stock option when required
+- `/getmods` diagnostic command
+- Prints available mod slots and option counts to the F8 console
+- Lightweight standalone implementation
+- No framework dependency
 
-### Installation
-1. Download the script files and place them in a folder within your server's resources directory (e.g., resources/[standalone]/SimpleModkitManager).
+---
 
-2. Add the following line to your server.cfg file to start the resource:
+## 🎮 Command
 
-```
-ensure SimpleModkitManager
-```
+### `/getmods`
 
-(Note: Replace SimpleModkitManager with the name of your resource folder if you changed it.)
+While sitting in a vehicle, use `/getmods` and open the F8 console to view the modification slots available for that vehicle.
 
-3. Configure your vehicles in the config.lua file (see below).
+Example output:
 
-4. Restart your FiveM server.
-
-### Configuration
-- Configuration is done entirely within the config.lua file.
-
-- ``Config_vehicleModConfig``: This is the main table where you define your settings.
-
-- To add a vehicle, you create a new entry where the key is the vehicle's spawn name (e.g., "police3") and the value is a list of modType numbers you want to enable.
-
-### Example:
-- Let's say you want to force-enable the first available Roof accessory (modType 10) and the first available Grille (modType 6) on a vehicle with the spawn name police3.
-```
-Config_vehicleModConfig = {
-    ["police3"] = {10, 6}, -- Enables the first Roof and Grille options for police3```
-    ["police"] = {0, 4}, -- Enables the first Spoiler and Exhaust options for sentinel
-}
-```
-A list of common modType numbers is provided at the top of the config.lua file for easy reference.
-
-### Usage (Commands)
-- This script includes one essential command for finding the correct modType numbers for your vehicles.
-- ``/getmods`` - *This command is your most powerful tool for configuring this script. It inspects the vehicle you are currently in and prints a complete list of all its available mod slots to the F8 console.*
-
-### How to Use:
-
-- Get into the vehicle you want to configure.
-
-- Press F8 to open the console.
-
-- Type /getmods and press Enter.
-
-### Example Output:
-- If you use /getmods on a vehicle with a custom partition in the "Roof" slot, you might see this in the F8 console:
-```
+```text
 --- Vehicle Mod Information ---
 Mod Type: 0 | Available Options: 4 (Index 0 to 3)
 Mod Type: 6 | Available Options: 2 (Index 0 to 1)
 Mod Type: 10 | Available Options: 2 (Index 0 to 1)
 --- End of Information ---
 ```
-- This output tells you:
 
-1. The vehicle has a Grille slot (Mod Type: 6).
+---
 
-2. The vehicle has a Roof slot (Mod Type: 10).
+## ⚙️ Configuration
 
-- To enable the partition (which is in the Roof slot), you would add 10 to that vehicle's list in the config.
+Vehicle mod settings are managed through `config.lua`.
+
+Example:
+
+```lua
+Config_vehicleModConfig = {
+    ["police3"] = {10, 6},
+    ["police"] = {0, 4},
+}
+```
+
+Each vehicle entry contains the mod type numbers that should be automatically enabled.
+
+---
+
+## 📥 Installation
+
+1. Place the resource in your server's resources directory.
+2. Configure the vehicles and mod slots in `config.lua`.
+3. Add the resource to your `server.cfg` using the exact folder name.
+4. Restart the resource or server.
+
+---
+
+## 📋 Requirements
+
+- FiveM server
+- No framework required
+- Vehicles with supported modkit options
+
+---
+
+## 🌐 SimpleDevelopments
+
+SimpleModkit Manager is developed and maintained by **SimpleDevelopments**.
+
+<div align="center">
+
+### Keep it Simple. Keep it SimpleDevelopments.
+
+</div>
